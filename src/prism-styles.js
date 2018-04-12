@@ -7,8 +7,6 @@
 
 import {colors} from 'theme';
 
-console.log(require('glamor').styleSheet);
-
 const prismColors = {
   char: '#D8DEE9',
   comment: '#999999',
