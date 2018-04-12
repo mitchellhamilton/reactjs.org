@@ -17,10 +17,11 @@ import Header from 'components/LayoutHeader';
 import {media} from 'theme';
 
 // Import global styles
-import '../prism-styles';
-import 'glamor/reset';
+import prismStyles from '../prism-styles';
+import 'normalize.css/normalize.css';
 import 'css/reset.css';
 import 'css/algolia.css';
+import Global from '@emotion/global';
 
 type Props = {
   children: Function,
@@ -48,6 +49,7 @@ class Template extends Component<Props> {
           flexDirection: 'column',
           minHeight: 'calc(100vh - 40px)',
         }}>
+        <Global css={prismStyles} />
         <Header location={location} />
         <Flex
           direction="column"

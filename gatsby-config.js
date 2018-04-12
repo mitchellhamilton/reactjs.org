@@ -21,7 +21,6 @@ module.exports = {
     'gatsby-transformer-authors-yaml',
     'gatsby-transformer-home-example-code',
     'gatsby-plugin-netlify',
-    'gatsby-plugin-glamor',
     'gatsby-plugin-react-next',
     'gatsby-plugin-twitter',
     {

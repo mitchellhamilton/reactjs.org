@@ -12,7 +12,11 @@ const webpack = require('webpack');
 module.exports = ({config, stage}) => {
   // See https://github.com/FormidableLabs/react-live/issues/5
   config.plugin('ignore', () => new webpack.IgnorePlugin(/^(xor|props)$/));
-
+  config.plugin(`Emotion`, webpack.ProvidePlugin, [
+    {
+      EmotionJSX: `@emotion/jsx`,
+    },
+  ]);
   config.merge({
     resolve: {
       root: resolve(__dirname, '../src'),

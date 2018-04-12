@@ -5,7 +5,7 @@
  * @flow
  */
 
-import {createElement} from 'glamor/react';
+import createElement from '@emotion/jsx';
 
 import type {Node} from 'react';
 
