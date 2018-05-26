@@ -4,8 +4,7 @@
  * @emails react-core
  * @flow
  */
-
-import createElement from '@emotion/jsx';
+import * as React from 'react';
 
 import type {Node} from 'react';
 
@@ -26,30 +25,26 @@ type Props = {
  */
 const Flex = ({
   basis = 'auto',
-  children,
   direction = 'row',
   grow = 0,
   halign = 'flex-start',
   shrink = 1,
-  type = 'div',
+  type: Type = 'div',
   valign = 'flex-start',
   ...rest
-}: Props) =>
-  createElement(
-    type,
-    {
-      css: {
-        display: 'flex',
-        flexDirection: direction,
-        flexGrow: grow,
-        flexShrink: shrink,
-        flexBasis: basis,
-        justifyContent: direction === 'row' ? halign : valign,
-        alignItems: direction === 'row' ? valign : halign,
-      },
-      ...rest,
-    },
-    children,
-  );
+}: Props) => (
+  <Type
+    css={{
+      display: 'flex',
+      flexDirection: direction,
+      flexGrow: grow,
+      flexShrink: shrink,
+      flexBasis: basis,
+      justifyContent: direction === 'row' ? halign : valign,
+      alignItems: direction === 'row' ? valign : halign,
+    }}
+    {...rest}
+  />
+);
 
 export default Flex;

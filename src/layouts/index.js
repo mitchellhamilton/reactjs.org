@@ -21,7 +21,7 @@ import prismStyles from '../prism-styles';
 import 'normalize.css/normalize.css';
 import 'css/reset.css';
 import 'css/algolia.css';
-import Global from '@emotion/global';
+import {Global} from '@emotion/core';
 
 type Props = {
   children: Function,

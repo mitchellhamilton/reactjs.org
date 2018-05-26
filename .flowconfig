@@ -5,6 +5,7 @@
 <PROJECT_ROOT>/public/.*
 
 [include]
+<PROJECT_ROOT>/node_modules/@emotion/.*
 
 [libs]
 ./node_modules/fbjs/flow/lib/dev.js

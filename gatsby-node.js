@@ -15,7 +15,18 @@ exports.modifyBabelrc = ({babelrc}) => {
   return {
     ...babelrc,
     plugins: babelrc.plugins.concat([
-      [`transform-react-jsx`, {pragma: `EmotionJSX`}],
+      [`transform-react-jsx`, {pragma: `___EmotionJSX`}],
+      [
+        'babel-plugin-jsx-pragmatic',
+        {
+          export: 'jsx',
+          module: '@emotion/core',
+          import: '___EmotionJSX',
+        },
+      ],
+      process.env.NODE_ENV === 'production'
+        ? ['@emotion/babel-plugin-core', {jsx: true}]
+        : ['@emotion/babel-plugin-core', {jsx: true, sourceMap: true}],
     ]),
   };
 };

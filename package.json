@@ -13,11 +13,11 @@
     "eslint-plugin-relay/graphql": "0.10.5"
   },
   "dependencies": {
-    "@emotion/core": "^0.6.0",
-    "@emotion/global": "^0.6.0",
-    "@emotion/jsx": "^0.5.0",
+    "@emotion/babel-plugin-core": "^0.6.1",
+    "@emotion/core": "^0.10.1",
     "array-from": "^2.1.1",
     "babel-eslint": "^8.0.1",
+    "babel-plugin-jsx-pragmatic": "^1.0.2",
     "eslint": "^4.8.0",
     "eslint-config-fbjs": "^2.0.0",
     "eslint-config-react": "^1.1.7",
