@@ -186,14 +186,12 @@ If you "fork" props by using them for state, you might also want to implement [`
 ### `static getDerivedStateFromProps()`
 
 ```js
-static getDerivedStateFromProps(nextProps, prevState)
+static getDerivedStateFromProps(props, state)
 ```
 
-`getDerivedStateFromProps` is invoked after a component is instantiated as well as when it receives new props. It should return an object to update state, or null to indicate that the new props do not require any state updates.
+`getDerivedStateFromProps` is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or null to update nothing.
 
-Note that if a parent component causes your component to re-render, this method will be called even if props have not changed. You may want to compare new and previous values if you only want to handle changes.
-
-Calling `this.setState()` generally doesn't trigger `getDerivedStateFromProps()`.
+Note that this method is fired on *every* render, regardless of the cause. This is in contrast to `UNSAFE_componentWillReceiveProps`, which only fires when the parent causes a re-render and not as a result of a local `setState`.
 
 * * *
 
@@ -237,7 +235,9 @@ UNSAFE_componentWillReceiveProps(nextProps)
 
 > Note
 >
-> It is recommended that you use the static [`getDerivedStateFromProps`](#static-getderivedstatefromprops) lifecycle instead of `UNSAFE_componentWillReceiveProps`. [Learn more about this recommendation here.](/blog/2018/03/29/react-v-16-3.html#component-lifecycle-changes)
+> It is not recommended to use this lifecycle in the new code. If you need to calculate next state based on a change in props, use the static [`getDerivedStateFromProps`](#static-getderivedstatefromprops) lifecycle. If you need to perform a side effect (for example, data fetching or an animation) in response to a change in props, use [`componentDidUpdate`](#componentdidupdate) lifecycle instead. For some use cases, you need to use both: `getDerivedStateFromProps` for a calculation, and `componentDidUpdate` for a side effect.
+>
+>[Learn more about this recommendation here.](/blog/2018/03/29/react-v-16-3.html#component-lifecycle-changes)
 
 `UNSAFE_componentWillReceiveProps()` is invoked before a mounted component receives new props. If you need to update the state in response to prop changes (for example, to reset it), you may compare `this.props` and `nextProps` and perform state transitions using `this.setState()` in this method.
 
@@ -329,7 +329,7 @@ If your component implements the `getSnapshotBeforeUpdate()` lifecycle, the valu
 componentWillUnmount()
 ```
 
-`componentWillUnmount()` is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in `componentDidMount()`.
+`componentWillUnmount()` is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in `componentDidMount()`. You should not call `setState()` here because the component will never be re-rendered.
 
 * * *
 
